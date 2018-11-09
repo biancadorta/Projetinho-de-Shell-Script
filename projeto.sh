@@ -67,5 +67,9 @@ Permissoes(){
 	
 }
 
+AlterarDonoArqDir(){
+
+	#chown $novo_dono $caminho_arquivo
+}
 
 Principal
