@@ -1,9 +1,8 @@
 #!/bin/bash
 clear
 
-
-
 Principal(){
+clear
 echo "=========PROJETINHO DE SHELL SCRIPT============="
 
 while :
@@ -36,23 +35,35 @@ Grupo(){
 	echo "Qual sua sub-opcao? "
 	read subOp
 
-	#case $subOp in
-	#a) CreateGroup;;
-	#b) AlterNameGroup;;
-	#*) echo "Digite um valor valido." Grupo;;
-	#esac	
+	case $subOp in 
+	a) CreateGroup;;
+	b) AlterNameGroup;;
+	*) echo "Digite um valor valido."; Grupo;;
+	esac	
 }
 
-#CreateGroup(){}
+CreateGroup(){
+	echo 
+	echo "Digite o nome do grupo:"
+	echo 
+	read nomeGroup
+	groupadd $nomeGroup		
+}
 
-#AlterNameGroup(){}
+AlterNameGroup(){
+	echo 
+	echo "Qual o nome antigo do grupo?"	
+	read nome_antigo
+	echo "Digite o novo nome do grupo:"
+	read nome_novo
+	#validar o nome antigo para ver se existe
+	groupmod $nome_novo $nome_antigo	
+}
 
 Usuario(){
-	
 	echo "Digite o nome do Usuario a ser criado"
 	read nome_usu
 	adduser $nome_usu
-
 }
 
 Permissoes(){
@@ -63,13 +74,9 @@ Permissoes(){
 	echo "b. Alterar o grupo dono de um arquivo ou diretorio."
 	echo "c. Alterar as permissoes de um arquivo ou diretorio 
 	separadamente."
-	read $subop
-	
-}
-
-AlterarDonoArqDir(){
-
-	#chown $novo_dono $caminho_arquivo
+	read $subop	
 }
 
 Principal
+
+
