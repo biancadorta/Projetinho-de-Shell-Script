@@ -1,22 +1,30 @@
 #!/bin/bash
 clear
 
+
+
 Principal(){
 echo "=========PROJETINHO DE SHELL SCRIPT============="
-echo "Opcoes para :"
-echo 
-echo "1) Grupo"
-echo "2) Usuario"
-echo "3) Permissoes de acesso"
-echo "Qual sua opcao? " 
-read opcao
 
-case $opcao in
-1) Grupo;;
-#2) Usuario;;
-3) Permissoes;; 
-*) echo "Digite um parametro valido." Principal;; #caso nao seja igual a nenhuma das opcoes anteriores
-esac #indica o fim do case
+while :
+do
+	echo "Escolha uma opcao :"
+	echo 
+	echo "1) Grupo"
+	echo "2) Usuario"
+	echo "3) Permissoes de acesso"
+	echo "4) Sair"	
+	echo "Qual sua opcao? " 
+	read opcao
+
+	case $opcao in
+		1) Grupo;;
+		2) Usuario;;
+		3) Permissoes;; 
+		4) exit;;
+		*) echo "Digite um parametro valido."; Principal;; #caso nao seja igual a nenhuma das opcoes anteriores
+	esac #indica o fim do case
+done
 }
 
 Grupo(){
@@ -28,9 +36,9 @@ Grupo(){
 	echo "Qual sua sub-opcao? "
 	read subOp
 
-	#case $subOp
-	#a) CreateGroup();;
-	#b) AlterNameGroup();;
+	#case $subOp in
+	#a) CreateGroup;;
+	#b) AlterNameGroup;;
 	#*) echo "Digite um valor valido." Grupo;;
 	#esac	
 }
@@ -39,7 +47,13 @@ Grupo(){
 
 #AlterNameGroup(){}
 
-#Usuario(){}
+Usuario(){
+	
+	echo "Digite o nome do Usuario a ser criado"
+	read nome_usu
+	adduser nome_usu
+
+}
 
 Permissoes(){
 	echo 
@@ -53,6 +67,5 @@ Permissoes(){
 	
 }
 
+
 Principal
-
-
