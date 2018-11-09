@@ -51,7 +51,7 @@ Usuario(){
 	
 	echo "Digite o nome do Usuario a ser criado"
 	read nome_usu
-	adduser nome_usu
+	adduser $nome_usu
 
 }
 
