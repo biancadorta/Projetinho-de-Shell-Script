@@ -27,6 +27,7 @@ done
 }
 
 Grupo(){
+	clear
 	echo 
 	echo "Sub-opcoes:"
 	echo 
@@ -67,6 +68,7 @@ Usuario(){
 }
 
 Permissoes(){
+	clear
 	echo 
 	echo "Sub-opcoes: "
 	echo 
@@ -74,7 +76,93 @@ Permissoes(){
 	echo "b. Alterar o grupo dono de um arquivo ou diretorio."
 	echo "c. Alterar as permissoes de um arquivo ou diretorio 
 	separadamente."
-	read $subop	
+	read subopPerm	
+	case $subopPerm in
+		a) AlterarDonoArq;;
+		b) AlterarGroupDono;;
+		c) AlterarPermissoes;;
+		*) echo "Digite um valor válido."; Permissoes;;
+	esac
+}
+
+AlterarDonoArq(){
+	echo "Escreva o nome do novo proprietario"
+	read nome_prop
+	echo "Forneça o nome do arquivo ou diretorio"
+	read arq_dir
+
+	chown $nome_prop $arq_dir
+}
+
+AlterGroupDono(){
+	clear
+	echo "Digite o nome do arquivo ou diretorio, para alterar seu grupo dono."
+	read nomeArq_dir	
+}
+
+AlterarPermissoes(){
+	echo
+	echo "Digite o nome do arquivo ou diretorio"
+	read nome_arq_dir 
+
+
+	quem=("proprietario" "grupo" "publico")
+
+	echo "Responda 1 para sim e qualquer outro caracter para nao"
+	echo 
+
+	vetor[0]=0
+	vetor[1]=0
+	vetor[2]=0
+	i=0
+
+	while [ $i -lt 3 ];
+	do
+		echo "${quem[i]} podera executar?"
+		read aux
+
+		echo		
+		echo "${vetor[i]} "
+		echo
+
+		if [ $aux==1 ]//ele sai daqui com 1 nao importa o que eu faça
+		then
+			let vetor[i]=vetor[i]+1;
+		fi
+
+		echo		
+		echo "${vetor[i]} "
+		echo
+
+		echo "${quem[i]} podera gravar?"
+		read aux2
+
+		if [ $aux2 == 1 ]
+		then
+			let vetor[i]=vetor[i]+2;
+		fi
+		echo		
+		echo "${vetor[i]} "
+		echo
+
+		echo "${quem[i]} podera ler?"
+		read aux3
+
+		if [ $aux3 == 1 ]
+		then
+			let vetor[i]=vetor[i]+4;
+		fi		
+		
+		echo		
+		echo "${vetor[i]} "
+		echo
+
+		let i=i+1
+	done
+
+	echo "chmod ${vetor[0]}${vetor[1]}${vetor[2]} $nome_arq_dir"
+
+	chmod ${vetor[0]}${vetor[1]}${vetor[2]} $nome_arq_dir
 }
 
 Principal
