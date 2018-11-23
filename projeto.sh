@@ -46,7 +46,6 @@ Grupo(){
 CreateGroup(){
 	echo 
 	echo "Digite o nome do grupo:"
-	echo 
 	read nomeGroup
 	groupadd $nomeGroup		
 }
@@ -90,14 +89,18 @@ AlterarDonoArq(){
 	read nome_prop
 	echo "Forneça o nome do arquivo ou diretorio"
 	read arq_dir
-
-	chown $nome_prop $arq_dir
+	
+	chown $nome_prop $arq_dir	
 }
 
-AlterGroupDono(){
+AlterarGroupDono(){
 	clear
 	echo "Digite o nome do arquivo ou diretorio, para alterar seu grupo dono."
-	read nomeArq_dir	
+	read nomeArq_dir
+	echo "Qual sera o novo grupo dono do arquivo?"
+	read ngrp	 
+
+	chgrp $ngrp $nomeArq_dir	
 }
 
 AlterarPermissoes(){
@@ -106,7 +109,7 @@ AlterarPermissoes(){
 	read nome_arq_dir 
 
 
-	quem=("proprietario" "grupo" "publico")
+	quem=("proprietario" "grupo" "publico") #vetooor
 
 	echo "Responda 1 para sim e qualquer outro caracter para nao"
 	echo 
@@ -118,16 +121,17 @@ AlterarPermissoes(){
 
 	while [ $i -lt 3 ];
 	do
-		echo "${quem[i]} podera executar?"
-		read aux
 
 		echo		
 		echo "${vetor[i]} "
 		echo
 
-		if [ $aux==1 ]//ele sai daqui com 1 nao importa o que eu faça
+		echo "${quem[i]} podera executar?"
+		read aux1
+		
+		if [ $aux1 == 1 ]
 		then
-			let vetor[i]=vetor[i]+1;
+			let vetor[i]=vetor[i]+1; #
 		fi
 
 		echo		
